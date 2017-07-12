@@ -45,11 +45,13 @@ export default class MovieApp extends Component {
     }
 
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
-        style={styles.listView}
-      />
+      <View style={styles.container}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderMovie}
+          style={styles.listView}
+        />
+      </View>
     );
   }
 
@@ -65,7 +67,7 @@ export default class MovieApp extends Component {
 
   renderMovie(movie) {
     return (
-      <View style={styles.container}>
+      <View style={styles.movieContainer}>
         <Image
           source={{uri: movie.posters.thumbnail}}
           style={styles.thumbnail}
