@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Alert,
-  AppRegistry,
   ListView,
   Image,
-  NavigatorIOS,
-  StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
 
 import styles from './Stylesheet';
-import MoviePage from './MoviePage';
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/keefyhub/MovieApp/develop/Movies.json';
 
@@ -54,6 +49,7 @@ export default class SearchPage extends Component {
   }
 
   renderMovie(movie) {
+    const { navigate } = this.props.navigation;
     return (
       <TouchableHighlight onPress={() => this.onPressButton(movie)} underlayColor="white">
         <View style={styles.movieListContainer}>
@@ -71,11 +67,8 @@ export default class SearchPage extends Component {
   }
 
   onPressButton(movie) {
-    this.props.navigator.push({
-      title: movie.title,
-      component: MoviePage,
-      passProps: {movie: movie}
-    });
+    const { navigate } = this.props.navigation;
+    navigate('Movie', {movie: movie});
   }
 
   render() {

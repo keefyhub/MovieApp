@@ -5,12 +5,8 @@ import {
 var $backgroundColor = '#F5FCFF';
 
 export default StyleSheet.create({
-  nav: {
-    flex: 1
-  },
   wrapper: {
-    flex: 1,
-    marginTop: 60
+    flex: 1
   },
   listView: {
     backgroundColor: $backgroundColor,

@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Alert,
-  AppRegistry,
   Dimensions,
   ListView,
   Image,
-  NavigatorIOS,
   ScrollView,
-  StyleSheet,
   Text,
-  TouchableHighlight,
   View
 } from 'react-native';
 
@@ -19,11 +14,9 @@ import AutoHeightImage from 'react-native-auto-height-image';
 var screenWidth = Dimensions.get('window').width;
 var screenHeight = Dimensions.get('window').height;
 
-var REQUEST_URL = 'https://raw.githubusercontent.com/keefyhub/MovieApp/develop/Movies.json';
-
 export default class MoviePage extends Component {
   castList() {
-    var cast = this.props.movie.abridged_cast;
+    var cast = this.props.navigation.state.params.movie.abridged_cast;
 
     return cast.map(function(cast, i) {
       return(
@@ -35,7 +28,7 @@ export default class MoviePage extends Component {
   }
 
   showCastList() {
-    var showCast = this.props.movie.abridged_cast.length ? true : false;
+    var showCast = this.props.navigation.state.params.movie.abridged_cast.length ? true : false;
 
     if(showCast) {
       return (
@@ -52,7 +45,8 @@ export default class MoviePage extends Component {
   }
 
   render() {
-    var movie = this.props.movie;
+    console.log(this.props.navigation.state.params.movie);
+    var movie = this.props.navigation.state.params.movie;
 
     return (
       <ScrollView style={styles.scrollView}>
