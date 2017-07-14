@@ -1,31 +1,38 @@
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet
+} from 'react-native';
 
 var $backgroundColor = '#F5FCFF';
 
 export default StyleSheet.create({
-  container: {
-    backgroundColor: $backgroundColor,
+  nav: {
     flex: 1
+  },
+  wrapper: {
+    flex: 1,
+    marginTop: 60
   },
   listView: {
     backgroundColor: $backgroundColor,
     flex: 1,
-    marginTop: 20
   },
-  movieContainer: {
+  movieListContainer: {
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-between'
   },
-  thumbnail: {
+  movieListThumbnail: {
     height: 81,
     width: 53
   },
-  rightContainer: {
+  movieListContent: {
     flex: 1,
     justifyContent: 'center',
     marginLeft: 20
+  },
+  scrollView: {
+    flex: 1
   },
   title: {
     fontSize: 20
