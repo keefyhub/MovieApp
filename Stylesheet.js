@@ -2,21 +2,21 @@ import {
   StyleSheet
 } from 'react-native';
 
-var $backgroundColor = '#F5FCFF';
+var $backgroundColor = '#F5FCFF',
+    $lighterBackgroundColor = 'rgba(255, 255, 255, .6)';
 
 export default StyleSheet.create({
   wrapper: {
     flex: 1
   },
-  listView: {
-    backgroundColor: $backgroundColor,
-    flex: 1,
-  },
   movieListContainer: {
+    backgroundColor: $backgroundColor,
     display: 'flex',
     flexDirection: 'row',
-    flex: 1,
     justifyContent: 'space-between'
+  },
+  nthEven: {
+    backgroundColor: $lighterBackgroundColor
   },
   movieListThumbnail: {
     height: 81,

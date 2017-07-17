@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   ListView,
   Image,
+  ScrollView,
   Text,
   TouchableHighlight,
   View
@@ -15,10 +16,8 @@ export default class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-      loaded: false,
+      dataSource: '',
+      loaded: false
     };
   }
 
@@ -27,8 +26,8 @@ export default class SearchPage extends Component {
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
-          loaded: true,
+          dataSource: responseData.movies,
+          loaded: true
         });
       })
       .done();
@@ -48,27 +47,36 @@ export default class SearchPage extends Component {
     );
   }
 
-  renderMovie(movie) {
-    const { navigate } = this.props.navigation;
-    return (
-      <TouchableHighlight onPress={() => this.onPressButton(movie)} underlayColor="white">
-        <View style={styles.movieListContainer}>
-          <Image
-            source={{uri: movie.posters.thumbnail}}
-            style={styles.movieListThumbnail}
-          />
-          <View style={styles.movieListContent}>
-            <Text style={styles.title}>{movie.title}</Text>
-            <Text style={styles.year}>{movie.year}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-
   onPressButton(movie) {
     const { navigate } = this.props.navigation;
     navigate('Movie', {movie: movie});
+  }
+
+  checkIndexIsEven (n) {
+    return n % 2 == 0;
+  }
+
+  returnMovies(movie) {
+    var movies = this.state.dataSource;
+
+    return movies.map((movie, i) => {
+      var rowStyle = this.checkIndexIsEven(i) ?  styles.movieListContainer: [styles.movieListContainer, styles.nthEven];
+
+      return(
+        <TouchableHighlight onPress={() => this.onPressButton(movie)} underlayColor="white" key={i}>
+          <View style={rowStyle}>
+            <Image
+              source={{uri: movie.posters.thumbnail}}
+              style={styles.movieListThumbnail}
+            />
+            <View style={styles.movieListContent}>
+              <Text style={styles.title}>{movie.title}</Text>
+              <Text style={styles.year}>{movie.year}</Text>
+            </View>
+          </View>
+        </TouchableHighlight>
+      );
+    });
   }
 
   render() {
@@ -77,13 +85,9 @@ export default class SearchPage extends Component {
     }
 
     return (
-      <View style={styles.wrapper}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderMovie.bind(this)}
-          style={styles.listView}
-        />
-      </View>
+      <ScrollView style={styles.wrapper}>
+        {this.returnMovies()}
+      </ScrollView>
     );
   }
 }

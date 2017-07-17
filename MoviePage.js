@@ -21,7 +21,7 @@ export default class MoviePage extends Component {
     return cast.map(function(cast, i) {
       return(
         <View key={i}>
-        <Text>{cast.name}</Text>
+          <Text>{cast.name}</Text>
         </View>
       );
     });
