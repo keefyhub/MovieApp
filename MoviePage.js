@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   Dimensions,
   ListView,
   Image,
@@ -44,6 +45,10 @@ export default class MoviePage extends Component {
     }
   }
 
+  openMenu() {
+    return this.props.navigation.navigate('DrawerOpen');
+  }
+
   render() {
     console.log(this.props.navigation.state.params.movie);
     var movie = this.props.navigation.state.params.movie;
@@ -58,6 +63,10 @@ export default class MoviePage extends Component {
           {movie.mpaa_rating}
         </Text>
         {this.showCastList()}
+        <Button
+  onPress={() => this.openMenu()}
+  title="Press Me"
+/>
       </ScrollView>
     );
   }
